@@ -1,0 +1,31 @@
+$font-color:            #626e8b !default;
+$link-color:            #2f60e2 !default;
+
+
+$font-family-base:      'Open Sans', sans-serif !default;
+$fs-base:               14px !default;
+
+
+$border-radius:         4px !default;
+
+
+
+// Copy varaibles from bootstrap
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
+
+$grid-columns:                12 !default;

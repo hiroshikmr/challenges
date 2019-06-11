@@ -1,0 +1,59 @@
+//
+// Copy from bootstrap
+//
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min !=0, $min, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+    @return if(breakpoint-min($name, $breakpoints)==null, "", "-#{$name}");
+}
+
+
+@function minimum-container-width($max-widths: $container-max-widths) {
+
+    @each $name,
+    $max-width in $max-widths {
+        @if $max-width>10px {
+            @return $max-width;
+        }
+    }
+
+    @return 0;
+}
+
+@function active-breakpoint($name, $breakpoints: $grid-breakpoints) {
+    @return index(map-keys($breakpoints), $name) !=null;
+}
+
+
+//
+// Override bootstrap
+//
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+
+    @if $min {
+        @if $min>minimum-container-width() {
+            @media (min-width: $min) {
+                @content;
+            }
+        }
+
+        @else {
+            @content;
+        }
+    }
+
+    @else {
+        @if active-breakpoint($name) {
+            @content;
+        }
+    }
+}

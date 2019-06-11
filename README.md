@@ -9,7 +9,7 @@
 **Tamboon React** is a code challenge for frontend developer.
 
 ## Scenario
-Once upon a time.. nope!  
+Once upon a time.. nope!
 So here, you have been temporarily hired by Omise and assigned to work on the charity donation project which the previously assigned front-end developer and designer got the urgent matters to solve, so they will not be able to finish the project on time..
 
 Fortunately, the API server is already done. You will need to grab on the requirements and complete the project while ensuring the application to have great engineering and well-design ✨
@@ -17,7 +17,7 @@ Fortunately, the API server is already done. You will need to grab on the requir
 ![tamboon-react-screenshot](https://git.omise.co/storage/user/56/files/b407c6c4-ad09-11e7-8792-dc5b468333df)
 
 ## Mission
-Well, grap your guns, stock up your food and bring down your armor. We gonna need it for tonight!  
+Well, grap your guns, stock up your food and bring down your armor. We gonna need it for tonight!
 **Here are the tasks you must complete:**
 
 - [ ] Complete the application according to the design (image above).
@@ -65,3 +65,11 @@ Please remember that your patch must consist of multiple separate commits. Your 
 If you notice more bugs in the original implementation you can add fixes for those as well. You won't be penalized if you don't. However we ask you not to add more features than the one given in the mission list.
 
 Let's rock! :metal:
+
+
+NLT:
+Please use:
+- install webpack, node.js, yarn on the project
+- install "fake or Mock an API with JSON Server-":              `json-server --watch db.json`
+- install css compiler:                                         `npm install style-loader css-loader --save-dev`
+- install bootstrap:                                            `npm install bootstrap`
