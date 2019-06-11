@@ -7,9 +7,11 @@
   "author": "Ratchagarn Naewbuntad <ratchagarn@omise.co>",
   "license": "MIT",
   "scripts": {
+    "start": "webpack-dev-server",
     "server": "json-server --watch db.json --port 3001",
     "client": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
