@@ -1,0 +1,35 @@
+//
+// Utilities - Grid
+//
+
+// Width based on columns per row
+
+@mixin width-by-cpr($columns: 1) {
+    @if $columns=='auto' {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+    }
+
+    @elseif type-of($columns)=='number' {
+        flex: 0 0 100% / $columns;
+        max-width: 100% / $columns;
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+
+        @for $i from 1 through $grid-columns {
+            .row-cpr#{$infix}-#{$i} {
+
+                >.col,
+                >[class*="col-"] {
+                    @include width-by-cpr($i);
+                }
+            }
+        }
+    }
+}

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import fetch from 'isomorphic-fetch';
 
 import { summaryDonations } from './helpers';
-
-
-const Card = styled.div`
-  margin: 10px;
-  border: 1px solid #ccc;
-`;
 
 export default connect((state) => state)(
   class App extends Component {
@@ -24,17 +17,17 @@ export default connect((state) => state)(
 
     componentDidMount() {
       const self = this;
-      fetch('http://localhost:3001/charities')
+      fetch('http://localhost:3000/charities')
         .then(function(resp) { return resp.json(); })
         .then(function(data) {
           self.setState({ charities: data }) });
 
-      fetch('http://localhost:3001/payments')
+      fetch('http://localhost:3000/payments')
         .then(function(resp) { return resp.json() })
         .then(function(data) {
           self.props.dispatch({
             type: 'UPDATE_TOTAL_DONATE',
-            amount: summaryDonations(data.map((item) => (item.amount))),
+            amount: summaryDonations(data.map((item) => (item.amount != undefined ? item.amount : 0))),
           });
         })
     }
@@ -53,31 +46,45 @@ export default connect((state) => state)(
           </label>
         ));
 
+        const divStyle = {
+          backgroundImage: 'url(images/' + item.image + ')',
+        };
+
         return (
-          <Card key={i}>
-            <p>{item.name}</p>
-            {payments}
-            <button onClick={handlePay.call(self, item.id, self.state.selectedAmount, item.currency)}>Pay</button>
-          </Card>
+          <div className="col" key={i}>
+            <div className="card">
+              <a href="#" aria-label="Close" className="close">&times;</a>
+              <div className="card__view card__front">
+                  <div className="card__img" style={divStyle} ></div>
+                  <div className="card__foot">
+                      <span className="name">{item.name}</span>
+                      <a href="javascript:;" className="btn btn-default">Donate</a>
+                  </div>
+              </div>
+              <div className="card__view card__back">
+                  <p className="instruct">Select the amount to donate ({item.currency})</p>
+                  <div className="payments">
+                    {payments}
+                  </div>
+                  <button className="btn btn-default" onClick={handlePay.call(self, item.id, self.state.selectedAmount, item.currency)}>Pay</button>
+              </div>
+            </div>
+          </div>
         );
       });
 
-      const style = {
-        color: 'red',
-        margin: '1em 0',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        textAlign: 'center',
-      };
       const donate = this.props.donate;
       const message = this.props.message;
 
       return (
-        <div>
+        <div className="container">
           <h1>Tamboon React</h1>
           <p>All donations: {donate}</p>
-          <p style={style}>{message}</p>
-          {cards}
+          <p className="message">{message}</p>
+
+          <div className="row row-cpr-1 row-cpr-md-2">
+            {cards}
+          </div>
         </div>
       );
     }
@@ -87,7 +94,7 @@ export default connect((state) => state)(
 function handlePay(id, amount, currency) {
   const self = this;
   return function() {
-    fetch('http://localhost:3001/payments', {
+    fetch('http://localhost:3000/payments', {
       method: 'POST',
       body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
     })
