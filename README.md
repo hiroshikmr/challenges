@@ -68,8 +68,21 @@ Let's rock! :metal:
 
 
 NLT:
-Please use:
+Usage (may need to run manually for windows...):
 - install webpack, node.js, yarn on the project
 - install css compiler:                                         `npm install style-loader css-loader --save-dev`
                                                                 `npm install postcss-loader --save-dev`
 - install bootstrap:                                            `npm install bootstrap`
+
+- remove 'styled-components' because should make css separated, then easily to maintain, create themes...
+
+
+
+Behavior:
+- Click donate: active current card (show the list payments)
+- Click close button: hide the current active card
+- Click Pay button: update payment to database. update "all donations" in the header
+
+
+Result:
+- It should run well on modern browsers now. And responsive!

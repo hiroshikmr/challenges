@@ -17,6 +17,10 @@ a {
 
 h1 {
     text-align: center;
+
+    @include media-breakpoint-up(md) {
+        font-size: 30px;
+    }
 }
 
 .card {
@@ -25,6 +29,10 @@ h1 {
     display: flex;
     border-radius: $border-radius;
     box-shadow: 1px 2px 5px #ddd;
+
+    &__view {
+        transition: opacity .25s ease-in-out;
+    }
 
     &__front {
         display: flex;
@@ -45,12 +53,25 @@ h1 {
         align-items: center;
         justify-content: space-between;
         padding: 1rem;
+
+        @include media-breakpoint-up(md) {
+            height: calc(42px + 2rem);
+        }
+
+        .name {
+            margin-right: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 42px;
+        }
     }
 
     &__back {
         visibility: hidden;
         opacity: 0;
-        transition: opacity .2s;
         position: absolute;
         top: 0;
         right: 0;
@@ -64,19 +85,18 @@ h1 {
         padding: 2rem;
     }
 
-    // &:hover {
+    &--active {
 
-    //     .card__back,
-    //     .close {
-    //         visibility: visible;
-    //         opacity: 1;
-    //     }
+        .card__back,
+        .close {
+            visibility: visible;
+            opacity: 1;
+        }
 
-    //     .card__front {
-    //         opacity: .1;
-    //     }
-    // }
-
+        .card__front {
+            opacity: .1;
+        }
+    }
 }
 
 
@@ -97,11 +117,13 @@ h1 {
 }
 
 .message {
-    color: red;
-    margin: 1em 0;
+    color: green;
     font-weight: bold;
     font-size: 16px;
-    text-align: center;
+
+    &.error {
+        color: red;
+    }
 }
 
 .btn {
@@ -119,13 +141,54 @@ h1 {
 
 .close {
     position: absolute;
-    right: 0;
-    top: 0;
+    top: .5rem;
+    right: .5rem;
+    padding: .5rem .75rem;
     font-size: 20px;
-    padding: 1rem;
     line-height: 1;
     color: $font-color;
     visibility: hidden;
     opacity: 0;
     z-index: 10;
+    border: 1px solid transparent;
+    border-radius: 50%;
+
+    &:hover {
+        border-color: lighten($font-color, 25%);
+    }
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: $header-fixed-height;
+    background-color: #fff;
+    box-shadow: 1px 2px 5px #ddd;
+
+    .summary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        @include media-breakpoint-up(sm) {
+            display: block;
+        }
+    }
+
+    .message {
+        @include media-breakpoint-up(sm) {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    }
+}
+
+.main-content {
+    padding-top: calc(#{$header-fixed-height} + 30px);
 }
