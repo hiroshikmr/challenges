@@ -4,7 +4,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App from './App';
 
-// import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './scss/index.scss';
 
 const store = createStore(function (state, action) {

@@ -1,4 +1,6 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== 'production';
 
 const config = {
     entry: './src/index.js',
@@ -11,6 +13,7 @@ const config = {
 
     devtool: 'inline-source-map',
 
+
     devServer: {
         inline: true,
         host: '0.0.0.0',
@@ -22,25 +25,29 @@ const config = {
 
     module: {
         rules: [{
-            test: /\.js$/,
-            exclude: [/node_modules/],
-            use: {
-                loader: 'babel-loader',
+                test: /\.js$/,
+                exclude: [/node_modules/],
+                use: {
+                    loader: 'babel-loader',
+                },
             },
-        }, {
-            test: /\.scss$/,
-            use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                },
-                {
-                    loader: "css-loader" // translates CSS into CommonJS
-                },
-                {
-                    loader: "sass-loader" // compiles Sass to CSS
-                }
-            ]
-        }],
-    }
+            {
+                test: /\.s?[ac]ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: { url: false, sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                ],
+            }
+        ],
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].css"
+        })
+
+    ],
+    mode: devMode ? 'development' : 'production'
 };
 
 module.exports = config;

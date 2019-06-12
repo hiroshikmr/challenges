@@ -17,12 +17,12 @@ export default connect((state) => state)(
 
     componentDidMount() {
       const self = this;
-      fetch('http://localhost:3000/charities')
+      fetch('http://localhost:3001/charities')
         .then(function(resp) { return resp.json(); })
         .then(function(data) {
-          self.setState({ charities: data }) });
+          self.setState({ charities: data}) });
 
-      fetch('http://localhost:3000/payments')
+      fetch('http://localhost:3001/payments')
         .then(function(resp) { return resp.json() })
         .then(function(data) {
           self.props.dispatch({
@@ -31,6 +31,7 @@ export default connect((state) => state)(
           });
         })
     }
+
 
     render() {
       const self = this;
@@ -58,7 +59,7 @@ export default connect((state) => state)(
                   <div className="card__img" style={divStyle} ></div>
                   <div className="card__foot">
                       <span className="name">{item.name}</span>
-                      <a href="javascript:;" className="btn btn-default">Donate</a>
+                      <button className="btn btn-default">Donate</button>
                   </div>
               </div>
               <div className="card__view card__back">
@@ -94,7 +95,7 @@ export default connect((state) => state)(
 function handlePay(id, amount, currency) {
   const self = this;
   return function() {
-    fetch('http://localhost:3000/payments', {
+    fetch('http://localhost:3001/payments', {
       method: 'POST',
       body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
     })

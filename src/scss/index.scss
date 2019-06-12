@@ -1,5 +1,6 @@
 @import "variables.scss";
 
+@import "~bootstrap/scss/bootstrap-grid.scss";
 @import "./mixin/breakpoint.scss";
 @import "./grid.scss";
 
@@ -63,18 +64,18 @@ h1 {
         padding: 2rem;
     }
 
-    &:hover {
+    // &:hover {
 
-        .card__back,
-        .close {
-            visibility: visible;
-            opacity: 1;
-        }
+    //     .card__back,
+    //     .close {
+    //         visibility: visible;
+    //         opacity: 1;
+    //     }
 
-        .card__front {
-            opacity: .1;
-        }
-    }
+    //     .card__front {
+    //         opacity: .1;
+    //     }
+    // }
 
 }
 

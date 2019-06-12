@@ -70,6 +70,6 @@ Let's rock! :metal:
 NLT:
 Please use:
 - install webpack, node.js, yarn on the project
-- install "fake or Mock an API with JSON Server-":              `json-server --watch db.json`
 - install css compiler:                                         `npm install style-loader css-loader --save-dev`
+                                                                `npm install postcss-loader --save-dev`
 - install bootstrap:                                            `npm install bootstrap`
