@@ -9,9 +9,8 @@ const config = {
         path: path.resolve(__dirname, 'build'),
         publicPath: 'build',
     },
-    watch: true,
-
-    devtool: 'inline-source-map',
+    // watch: true,
+    // devtool: 'inline-source-map',
 
 
     devServer: {
@@ -28,15 +27,15 @@ const config = {
                 test: /\.js$/,
                 exclude: [/node_modules/],
                 use: {
-                    loader: 'babel-loader',
+                    loader: 'babel-loader'
                 },
             },
             {
                 test: /\.s?[ac]ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: { url: false, sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
+                    { loader: 'css-loader', options: { url: false, sourceMap: false } },
+                    { loader: 'sass-loader', options: { sourceMap: false } }
                 ],
             }
         ],

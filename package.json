@@ -14,7 +14,8 @@
     "server": "json-server --watch db.json --port 3001",
     "client": "webpack-dev-server",
     "test": "jest",
-    "build": "webpack"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
